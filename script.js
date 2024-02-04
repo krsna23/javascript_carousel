@@ -1,9 +1,19 @@
 const left = document.getElementById('left-arrow');
 const right = document.getElementById('right-arrow');
 const images = document.querySelectorAll(".image");
+const image = document.getElementById('image');
 
+const imagesUrl = [
+    'url(https://source.unsplash.com/V1NTzSrnXvw)',
+    'url(https://source.unsplash.com/F9mqFr3oIZg)',
+    'url(https://source.unsplash.com/wSFfGQnFNdw)',
+    'url(https://source.unsplash.com/YPoByk5REwQ)'
+]
 
 let currentSlide = 0;
+
+image.style.backgroundImage= imagesUrl[0];
+image.classList.add('image');
 
 left.addEventListener('click', () => {
     console.log("left clicked.");
@@ -15,27 +25,32 @@ right.addEventListener('click', () => {
     moveSlide(1);
 })
 
-console.log(`current slide: ${currentSlide}`);
 
 function moveSlide(direction) {
+
     // console.log(`Images: ${images}`);
-    console.log(`11current slide: ${currentSlide}`);
-    let newSlideIndex = currentSlide + direction;
-    console.log(`11New slide: ${newSlideIndex}`);
-    if (newSlideIndex<0)
+
+    currentSlide = currentSlide + direction;
+
+    if (currentSlide < 0)
     {
-        newSlideIndex = 3;
+        currentSlide = 3;
     }
     
-    else if(newSlideIndex>3)
+    else if(currentSlide > 3)
     {
-        newSlideIndex=0;
+        currentSlide = 0;
     }
 
-    console.log(`New slide: ${newSlideIndex}`);
+    console.log(`New slide: ${currentSlide}`);
     console.log(`current slide: ${currentSlide}`);
+    console.log(`ImagesUrl[currentSlide]: ${imagesUrl[currentSlide]}`);
 
-    images[currentSlide].classList.remove("active");
-    images[newSlideIndex].classList.add("active");
-    currentSlide = newSlideIndex;
+    currentSlide = currentSlide;
+
+    image.style.backgroundImage= imagesUrl[currentSlide];
+    image.classList.add('image');
+    // imagesUrl[currentSlide].classList.remove("active");
+    // imagesUrl[newSlideIndex].classList.add("active");
+    // currentSlide = newSlideIndex;
 }
